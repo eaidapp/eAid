@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'nav_drawer.dart';
+import '../nav_bar/nav_drawer.dart';
 
 class profile extends StatelessWidget {
   static const String routeName = '/settings';

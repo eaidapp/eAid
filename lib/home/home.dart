@@ -1,7 +1,9 @@
+import '/donation_requests/request.dart';
+import 'card.dart';
 import 'package:flutter/material.dart';
-import 'request.dart';
-import 'request_detail.dart';
-import 'nav_drawer.dart';
+import '/donation_requests/request_detail.dart';
+import '../nav_bar/nav_drawer.dart';
+import 'search_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -18,6 +20,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          // Navigate to the Search Screen
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => SearchPage())),
+              icon: Icon(Icons.search))
+        ],
       ),
       drawer: NavDrawer(),
       body: SafeArea(
@@ -38,37 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: buildNoticeCard(Request.samples[index]),
             );
           },
-        ),
-      ),
-    );
-  }
-
-  Widget buildNoticeCard(Request request) {
-    return Card(
-//  how high off the screen the card is
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              request.requestTitle,
-              style: const TextStyle(fontSize: 18),
-            ),
-            Image(image: AssetImage(request.requestImage)),
-            const SizedBox(
-              height: 14.0,
-            ),
-            Text(
-              request.requestSummary,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Palatino',
-              ),
-            )
-          ],
         ),
       ),
     );

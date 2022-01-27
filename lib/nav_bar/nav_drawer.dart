@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'about.dart';
-import 'settings.dart';
+import '/account/sign_in.dart';
+import '../home/home.dart';
+import '../about/about.dart';
+import '../settings/settings.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -17,21 +18,26 @@ class NavDrawer extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                      size: 40,
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) => SignIn())),
+                      icon: Icon(
+                        Icons.account_circle,
+                        size: 50,
+                        color: Colors.white,
+                      ),
                     ),
                     flex: 2,
                   ),
                   Expanded(
                     flex: 6,
                     child: Text(
-                      "Create an account",
+                      "Sign In",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 20,
                       ),
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ],
