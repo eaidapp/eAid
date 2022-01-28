@@ -39,27 +39,28 @@ class _SearchPageState extends State<SearchPage> {
         width: double.infinity,
         height: 40,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            color: Colors.white, borderRadius: BorderRadius.circular(15)),
         child: Center(
           child: TextField(
             controller: _textController,
             decoration: InputDecoration(
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    _search();
-                    //make the search
-                  },
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {
-                    /* Clear the search field */
-                    clearText();
-                  },
-                ),
-                hintText: 'Search...',
-                border: InputBorder.none),
+              prefixIcon: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  _search();
+                  //make the search
+                },
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  /* Clear the search field */
+                  clearText();
+                },
+              ),
+              hintText: 'Search...',
+              border: InputBorder.none,
+            ),
           ),
         ),
       )),

@@ -22,23 +22,31 @@ class _RequestDetailState extends State<RequestDetail> {
         title: Text(widget.request.requestTitle),
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: Image(
-                image: AssetImage(widget.request.requestImage),
-              ),
+        child: Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: Image(
+                    image: AssetImage(widget.request.requestImage),
+                  ),
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    widget.request.requestDescription,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              widget.request.requestDescription,
-              style: const TextStyle(fontSize: 18),
-            ),
-          ],
+          ),
         ),
       ),
     );

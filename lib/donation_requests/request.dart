@@ -16,8 +16,8 @@ class Request {
     Request(
       'Request 1',
       'images/request1.jpg',
-      'This is the summary of request 1',
-      'This is the description of request 1 ',
+      'This is the summary of request 1hdjdkkdkdljshskdkdjsksllhjkhjksdfghjkghjkldjdjfjfjjienhkdoeifmdmsk',
+      'This is the description of request 1fjkgsghjkhfghjkertyuiosdjdkskshjkswnyetyuicvbnrtyusdfghjcvbncvbnmfghjcvbnmcvbnmvbnmghjkuiertyuirtyuityuivbnmghjkvbnmvbnrtyuiodfghjkrtyuioefaghjkvdbsnmdghsjklghjkldsghjklfbnmewfghjkdfghjkdfghjdfghjkdfghjkdfghjfghjfhjfghdfghjdfghjjkfghjfghjfghjfghjfghjdfghjfghjkfghjfghjghjkcvbnmrtyuidfghjvbnmrtyuvbntyuifghjksdjkertyuiodjkfghjkdfghjbncvbnmsdfghjertyuinmdfghjketyuicvbndfcvbnhjkbncvbfghhfghfghfghfhjfghvbdfghyuifghjvbn ',
     ),
     Request(
       'Request 2',

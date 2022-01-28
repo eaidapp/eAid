@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+//import 'display_account.dart';
 
 class SignIn extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _SignInState();
+  State<StatefulWidget> createState() => _SignInState();
 }
 
 // Used for controlling whether the user is loggin or creating an account
 enum FormType { login, register }
 
 class _SignInState extends State<SignIn> {
-  final TextEditingController _emailFilter = new TextEditingController();
-  final TextEditingController _passwordFilter = new TextEditingController();
+  final TextEditingController _emailFilter = TextEditingController();
+  final TextEditingController _passwordFilter = TextEditingController();
   String _email = "";
   String _password = "";
   FormType _form = FormType
@@ -54,9 +55,9 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         title: Text('Sign In'),
       ),
-      body: new Container(
+      body: Container(
         padding: EdgeInsets.all(16.0),
-        child: new Column(
+        child: Column(
           children: <Widget>[
             _buildTextFields(),
             _buildButtons(),
@@ -67,19 +68,19 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget _buildTextFields() {
-    return new Container(
-      child: new Column(
+    return Container(
+      child: Column(
         children: <Widget>[
-          new Container(
-            child: new TextField(
+          Container(
+            child: TextField(
               controller: _emailFilter,
-              decoration: new InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: 'Email'),
             ),
           ),
-          new Container(
-            child: new TextField(
+          Container(
+            child: TextField(
               controller: _passwordFilter,
-              decoration: new InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
           )
@@ -90,34 +91,34 @@ class _SignInState extends State<SignIn> {
 
   Widget _buildButtons() {
     if (_form == FormType.login) {
-      return new Container(
-        child: new Column(
+      return Container(
+        child: Column(
           children: <Widget>[
-            new RaisedButton(
-              child: new Text('Login'),
+            RaisedButton(
+              child: Text('Login'),
               onPressed: _loginPressed,
             ),
-            new FlatButton(
-              child: new Text('Dont have an account? Tap here to register.'),
+            FlatButton(
+              child: Text('Dont have an account? Tap here to register.'),
               onPressed: _formChange,
             ),
-            new FlatButton(
-              child: new Text('Forgot Password?'),
+            FlatButton(
+              child: Text('Forgot Password?'),
               onPressed: _passwordReset,
             )
           ],
         ),
       );
     } else {
-      return new Container(
-        child: new Column(
+      return Container(
+        child: Column(
           children: <Widget>[
-            new RaisedButton(
-              child: new Text('Create an Account'),
+            RaisedButton(
+              child: Text('Create an Account'),
               onPressed: _createAccountPressed,
             ),
-            new FlatButton(
-              child: new Text('Have an account? Click here to login.'),
+            FlatButton(
+              child: Text('Have an account? Click here to login.'),
               onPressed: _formChange,
             )
           ],
@@ -130,6 +131,7 @@ class _SignInState extends State<SignIn> {
 
   void _loginPressed() {
     print('The user wants to login with $_email and $_password');
+    //Navigator.of(context).push(MaterialPageRoute(builder: (_) => Dashboard()));
   }
 
   void _createAccountPressed() {
