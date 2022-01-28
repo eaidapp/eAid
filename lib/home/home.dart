@@ -31,23 +31,22 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: NavDrawer(),
       body: SafeArea(
         child: ListView.builder(
-          itemCount: Request.samples.length,
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return RequestDetail(request: Request.samples[index]);
-                    },
-                  ),
-                );
-              },
-              child: buildNoticeCard(Request.samples[index]),
-            );
-          },
-        ),
+            itemCount: Request.samples.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return RequestDetail(request: Request.samples[index]);
+                      },
+                    ),
+                  );
+                },
+                child: buildNoticeCard(Request.samples[index]),
+              );
+            }),
       ),
     );
   }
