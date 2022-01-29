@@ -5,13 +5,15 @@ import '../about/about.dart';
 import '../settings/settings.dart';
 
 class NavDrawer extends StatelessWidget {
+  const NavDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.deepPurple,
             ),
             child: Center(
@@ -21,7 +23,7 @@ class NavDrawer extends StatelessWidget {
                     child: IconButton(
                       onPressed: () => Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) => SignIn())),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.account_circle,
                         size: 50,
                         color: Colors.white,
@@ -29,9 +31,9 @@ class NavDrawer extends StatelessWidget {
                     ),
                     flex: 2,
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 6,
-                    child: Text(
+                    child: const Text(
                       "Sign In",
                       style: TextStyle(
                         color: Colors.white,
@@ -45,9 +47,9 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text("Home"),
+            title: const Text("Home"),
             leading: IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -55,18 +57,18 @@ class NavDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => MyHomePage(
+                  builder: (BuildContext context) => const MyHomePage(
                         title: 'eAid',
                       )));
             },
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
           ),
           ListTile(
-            title: Text("Settings"),
+            title: const Text("Settings"),
             leading: IconButton(
-              icon: Icon(Icons.account_circle),
+              icon: const Icon(Icons.account_circle),
               onPressed: () {},
             ),
             onTap: () {
@@ -75,13 +77,13 @@ class NavDrawer extends StatelessWidget {
                   builder: (BuildContext context) => profile()));
             },
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
           ),
           ListTile(
-            title: Text("About"),
+            title: const Text("About"),
             leading: IconButton(
-              icon: Icon(Icons.contact_page),
+              icon: const Icon(Icons.contact_page),
               onPressed: () {},
             ),
             onTap: () {

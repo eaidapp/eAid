@@ -1,4 +1,4 @@
-package com.example.eaid
+package ug.eaid.android
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -94,15 +94,15 @@ class _SignInState extends State<SignIn> {
       return Container(
         child: Column(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: Text('Login'),
               onPressed: _loginPressed,
             ),
-            FlatButton(
-              child: Text('Dont have an account? Tap here to register.'),
+            TextButton(
+              child: Text('Don\'t have an account? Tap here to register.'),
               onPressed: _formChange,
             ),
-            FlatButton(
+            TextButton(
               child: Text('Forgot Password?'),
               onPressed: _passwordReset,
             )
@@ -113,11 +113,11 @@ class _SignInState extends State<SignIn> {
       return Container(
         child: Column(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: Text('Create an Account'),
               onPressed: _createAccountPressed,
             ),
-            FlatButton(
+            TextButton(
               child: Text('Have an account? Click here to login.'),
               onPressed: _formChange,
             )

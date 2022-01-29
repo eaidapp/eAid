@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "eaid")
-set(APPLICATION_ID "com.example.eaid")
+set(APPLICATION_ID "ug.eaid.android")
 
 cmake_policy(SET CMP0063 NEW)
 
