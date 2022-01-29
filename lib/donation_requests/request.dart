@@ -20,13 +20,13 @@ class Request {
       'This is the description of request 1fjkgsghjkhfghjkertyuiosdjdkskshjkswnyetyuicvbnrtyusdfghjcvbncvbnmfghjcvbnmcvbnmvbnmghjkuiertyuirtyuityuivbnmghjkvbnmvbnrtyuiodfghjkrtyuioefaghjkvdbsnmdghsjklghjkldsghjklfbnmewfghjkdfghjkdfghjdfghjkdfghjkdfghjfghjfhjfghdfghjdfghjjkfghjfghjfghjfghjfghjdfghjfghjkfghjfghjghjkcvbnmrtyuidfghjvbnmrtyuvbntyuifghjksdjkertyuiodjkfghjkdfghjbncvbnmsdfghjertyuinmdfghjketyuicvbndfcvbnhjkbncvbfghhfghfghfghfhjfghvbdfghyuifghjvbn ',
     ),
     Request(
-      'Request 2',
+      'New Ward For our Health Centre',
       'images/request2.jpg',
       'This is the summary of request 2',
-      'This is the description of request 2 ',
+      'We have spent around 2 years in the pandemic of Covid-19. It is clear other health issues have been ignored. \nDonate and help our health centre get a new ward  ',
     ),
     Request(
-      'Request 3',
+      'New Class Block',
       'images/request3.jpg',
       'This is the summary of request 3',
       'This is the description of request 3 ',

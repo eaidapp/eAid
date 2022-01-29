@@ -23,9 +23,10 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           // Navigate to the Search Screen
           IconButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SearchPage())),
-              icon: Icon(Icons.search))
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => SearchPage())),
+            icon: Icon(Icons.search),
+          ),
         ],
       ),
       drawer: NavDrawer(),

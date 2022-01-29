@@ -39,7 +39,9 @@ class _SearchPageState extends State<SearchPage> {
         width: double.infinity,
         height: 40,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Center(
           child: TextField(
             controller: _textController,

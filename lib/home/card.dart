@@ -20,7 +20,8 @@ Widget buildNoticeCard(Request request) {
             height: 14.0,
           ),
           Text(
-            request.requestSummary,
+            request.requestTitle,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.black87,
               fontSize: 15.0,
