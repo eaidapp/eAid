@@ -1,5 +1,5 @@
 # eAid
 
-A mobile donation application.
+A mobile donation platform.
 
 - [Project website](https://eaidapp.github.io)
