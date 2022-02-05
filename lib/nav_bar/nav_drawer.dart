@@ -1,5 +1,5 @@
+import 'package:eaid/nav_bar/wrapper.dart';
 import 'package:flutter/material.dart';
-import '/account/sign_in.dart';
 import '../home/home.dart';
 import '../about/about.dart';
 import '../settings/settings.dart';
@@ -13,7 +13,7 @@ class NavDrawer extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.deepPurple,
             ),
             child: Center(
@@ -22,10 +22,10 @@ class NavDrawer extends StatelessWidget {
                   Expanded(
                     child: IconButton(
                       onPressed: () => Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) => SignIn())),
+                          .push(MaterialPageRoute(builder: (_) => Wrapper())),
                       icon: const Icon(
                         Icons.account_circle,
-                        size: 50,
+                        size: 60,
                         color: Colors.white,
                       ),
                     ),
@@ -33,13 +33,13 @@ class NavDrawer extends StatelessWidget {
                   ),
                   const Expanded(
                     flex: 6,
-                    child: const Text(
-                      "Sign In",
+                    child: Text(
+                      "Account",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
-                      textAlign: TextAlign.left,
+                      // textAlign: TextAlign.start,
                     ),
                   ),
                 ],
@@ -56,10 +56,13 @@ class NavDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (BuildContext context) => const MyHomePage(
-                        title: 'eAid',
-                      )));
+                    title: 'eAid',
+                  ),
+                ),
+              );
             },
           ),
           const Divider(

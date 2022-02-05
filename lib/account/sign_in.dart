@@ -1,7 +1,10 @@
+import 'package:eaid/services/auth.dart';
 import 'package:flutter/material.dart';
-//import 'display_account.dart';
+import 'display_account.dart';
 
 class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SignInState();
 }
@@ -12,8 +15,11 @@ enum FormType { login, register }
 class _SignInState extends State<SignIn> {
   final TextEditingController _emailFilter = TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
-  String _email = "";
-  String _password = "";
+
+  final AuthService _auth = AuthService();
+
+  String? _email;
+  String? _password;
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
@@ -129,9 +135,17 @@ class _SignInState extends State<SignIn> {
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed() {
-    print('The user wants to login with $_email and $_password');
-    //Navigator.of(context).push(MaterialPageRoute(builder: (_) => Dashboard()));
+  Future<void> _loginPressed() async {
+    dynamic result = await _auth.signInAnon;
+    if (result == null) {
+      print('Error signing in');
+    } else {
+      print('Signed in');
+      print(result);
+    }
+    //print('The user wants to login with $_email and $_password');
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (_) => DisplayAccount()));
   }
 
   void _createAccountPressed() {

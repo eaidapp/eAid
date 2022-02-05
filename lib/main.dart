@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'home/home.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    print(e.toString());
+  }
+
   runApp(const EAid());
 }
 
