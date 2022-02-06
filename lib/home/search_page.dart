@@ -47,14 +47,14 @@ class _SearchPageState extends State<SearchPage> {
             controller: _textController,
             decoration: InputDecoration(
               prefixIcon: IconButton(
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
                 onPressed: () {
                   _search();
                   //make the search
                 },
               ),
               suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
+                icon: const Icon(Icons.clear),
                 onPressed: () {
                   /* Clear the search field */
                   clearText();

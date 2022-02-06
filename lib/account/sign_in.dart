@@ -1,7 +1,10 @@
+import 'package:eaid/services/auth.dart';
 import 'package:flutter/material.dart';
-//import 'display_account.dart';
+import 'display_account.dart';
 
 class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SignInState();
 }
@@ -12,8 +15,11 @@ enum FormType { login, register }
 class _SignInState extends State<SignIn> {
   final TextEditingController _emailFilter = TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
-  String _email = "";
-  String _password = "";
+
+  final AuthService _auth = AuthService();
+
+  String _email = '';
+  String _password = '';
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
@@ -53,10 +59,10 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: const Text('Sign In'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             _buildTextFields(),
@@ -74,13 +80,13 @@ class _SignInState extends State<SignIn> {
           Container(
             child: TextField(
               controller: _emailFilter,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
           ),
           Container(
             child: TextField(
               controller: _passwordFilter,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
           )
@@ -95,15 +101,16 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: <Widget>[
             ElevatedButton(
-              child: Text('Login'),
+              child: const Text('Login'),
               onPressed: _loginPressed,
             ),
             TextButton(
-              child: Text('Don\'t have an account? Tap here to register.'),
+              child:
+                  const Text('Don\'t have an account? Tap here to register.'),
               onPressed: _formChange,
             ),
             TextButton(
-              child: Text('Forgot Password?'),
+              child: const Text('Forgot Password?'),
               onPressed: _passwordReset,
             )
           ],
@@ -114,11 +121,11 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: <Widget>[
             ElevatedButton(
-              child: Text('Create an Account'),
+              child: const Text('Create an Account'),
               onPressed: _createAccountPressed,
             ),
             TextButton(
-              child: Text('Have an account? Click here to login.'),
+              child: const Text('Have an account? Click here to login.'),
               onPressed: _formChange,
             )
           ],
@@ -129,13 +136,26 @@ class _SignInState extends State<SignIn> {
 
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
-  void _loginPressed() {
-    print('The user wants to login with $_email and $_password');
-    //Navigator.of(context).push(MaterialPageRoute(builder: (_) => Dashboard()));
+  Future<void> _loginPressed() async {
+    dynamic result = await _auth.signIn(_email, _password);
+    if (result == null) {
+      print('Error signing in');
+    } else {
+      print('Signed in');
+      print(result.uid);
+    }
+    //print('The user wants to login with $_email and $_password');
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (_) => DisplayAccount()));
   }
 
-  void _createAccountPressed() {
+  Future<void> _createAccountPressed() async {
+    dynamic result = await _auth.signUp(_email, _password);
+    if (result == null) {
+      print('Error signing up');
+    }
     print('The user wants to create an account with $_email and $_password');
+    print(result.uid);
   }
 
   void _passwordReset() {

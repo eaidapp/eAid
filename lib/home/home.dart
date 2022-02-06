@@ -24,12 +24,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // Navigate to the Search Screen
           IconButton(
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => SearchPage())),
-            icon: Icon(Icons.search),
+                .push(MaterialPageRoute(builder: (_) => const SearchPage())),
+            icon: const Icon(Icons.search),
           ),
         ],
       ),
-      drawer: NavDrawer(),
+      drawer: const NavDrawer(),
       body: SafeArea(
         child: ListView.builder(
             itemCount: Request.samples.length,

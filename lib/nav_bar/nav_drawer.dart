@@ -1,5 +1,5 @@
+import 'package:eaid/nav_bar/wrapper.dart';
 import 'package:flutter/material.dart';
-import '/account/sign_in.dart';
 import '../home/home.dart';
 import '../about/about.dart';
 import '../settings/settings.dart';
@@ -18,28 +18,24 @@ class NavDrawer extends StatelessWidget {
             ),
             child: Center(
               child: Row(
-                children: [
+                children: const [
                   Expanded(
-                    child: IconButton(
-                      onPressed: () => Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (_) => SignIn())),
-                      icon: const Icon(
-                        Icons.account_circle,
-                        size: 50,
-                        color: Colors.white,
-                      ),
+                    flex: 3,
+                    child: Icon(
+                      Icons.monetization_on,
+                      size: 40,
+                      color: Colors.white,
                     ),
-                    flex: 2,
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 6,
-                    child: const Text(
-                      "Sign In",
+                    child: Text(
+                      "eAid",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                       ),
-                      textAlign: TextAlign.left,
+                      // textAlign: TextAlign.start,
                     ),
                   ),
                 ],
@@ -56,10 +52,13 @@ class NavDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (BuildContext context) => const MyHomePage(
-                        title: 'eAid',
-                      )));
+                    title: 'eAid',
+                  ),
+                ),
+              );
             },
           ),
           const Divider(
@@ -68,13 +67,13 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             title: const Text("Settings"),
             leading: IconButton(
-              icon: const Icon(Icons.account_circle),
+              icon: const Icon(Icons.settings),
               onPressed: () {},
             ),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => profile()));
+                  builder: (BuildContext context) => const Profile()));
             },
           ),
           const Divider(
@@ -83,15 +82,35 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             title: const Text("About"),
             leading: IconButton(
-              icon: const Icon(Icons.contact_page),
+              icon: const Icon(Icons.contacts_rounded),
               onPressed: () {},
             ),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => contact()));
+                  builder: (BuildContext context) => Contact()));
             },
-          )
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          ListTile(
+            title: const Text("Start a fundraiser"),
+            leading: IconButton(
+              icon: const Icon(Icons.manage_accounts_rounded),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const Wrapper()));
+            },
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
         ],
       ),
     );

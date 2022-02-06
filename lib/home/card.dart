@@ -8,7 +8,7 @@ Widget buildNoticeCard(Request request) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
     borderOnForeground: false,
     child: Padding(
-      padding: EdgeInsets.fromLTRB(0, 35.0, 0, 16.0),
+      padding: const EdgeInsets.fromLTRB(0, 35.0, 0, 16.0),
       child: Column(
         children: <Widget>[
           // Text(
