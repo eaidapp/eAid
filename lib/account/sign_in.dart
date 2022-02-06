@@ -20,6 +20,7 @@ class _SignInState extends State<SignIn> {
 
   String _email = '';
   String _password = '';
+  String error = '';
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
@@ -67,6 +68,13 @@ class _SignInState extends State<SignIn> {
           children: <Widget>[
             _buildTextFields(),
             _buildButtons(),
+            SizedBox(
+              height: 12.0,
+            ),
+            Text(
+              error,
+              style: TextStyle(color: Colors.red, fontSize: 14.0),
+            )
           ],
         ),
       ),
@@ -86,7 +94,8 @@ class _SignInState extends State<SignIn> {
           Container(
             child: TextField(
               controller: _passwordFilter,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration:
+                  InputDecoration(labelText: 'Password(6 charachters minimum)'),
               obscureText: true,
             ),
           )
@@ -139,6 +148,7 @@ class _SignInState extends State<SignIn> {
     dynamic result = await _auth.signIn(_email, _password);
     if (result == null) {
       print('Error signing in');
+      setState(() => error = 'could not sign in');
     } else {
       print('Signed in');
       print(result.uid);
@@ -152,9 +162,11 @@ class _SignInState extends State<SignIn> {
     dynamic result = await _auth.signUp(_email, _password);
     if (result == null) {
       print('Error signing up');
+      setState(() => error = 'could not sign up');
+    } else {
+      print('The user wants to create an account with $_email and $_password');
+      print(result.uid);
     }
-    print('The user wants to create an account with $_email and $_password');
-    print(result.uid);
   }
 
   void _passwordReset() {

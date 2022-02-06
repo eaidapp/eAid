@@ -1,4 +1,5 @@
 import 'package:eaid/account/account.dart';
+import 'package:eaid/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 
@@ -46,12 +47,20 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+
+      //create a new document for the user with the uid
+      //use this when create fundraiser is called
+      await DatabaseService(uid: user!.uid).updateUserData('0', '0', '0');
+
       return _accountFromUser(user);
     } catch (e) {
       print(e.toString());
       return null;
     }
   }
+
+  //create fundraiser
+  Future createFundraiser() async {}
 
   //sign out
   Future signOut() async {
