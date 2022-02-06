@@ -18,8 +18,8 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
 
-  String? _email;
-  String? _password;
+  String _email = '';
+  String _password = '';
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
@@ -136,20 +136,25 @@ class _SignInState extends State<SignIn> {
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
   Future<void> _loginPressed() async {
-    dynamic result = await _auth.signInAnon;
+    dynamic result = await _auth.signIn(_email, _password);
     if (result == null) {
       print('Error signing in');
     } else {
       print('Signed in');
-      print(result);
+      print(result.uid);
     }
     //print('The user wants to login with $_email and $_password');
     // Navigator.of(context)
     //     .push(MaterialPageRoute(builder: (_) => DisplayAccount()));
   }
 
-  void _createAccountPressed() {
+  Future<void> _createAccountPressed() async {
+    dynamic result = await _auth.signUp(_email, _password);
+    if (result == null) {
+      print('Error signing up');
+    }
     print('The user wants to create an account with $_email and $_password');
+    print(result.uid);
   }
 
   void _passwordReset() {
