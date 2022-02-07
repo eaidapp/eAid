@@ -1,3 +1,4 @@
+import 'package:eaid/home/loading.dart';
 import 'package:eaid/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'display_account.dart';
@@ -17,9 +18,11 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _passwordFilter = TextEditingController();
 
   final AuthService _auth = AuthService();
+  bool loading = false;
 
   String _email = '';
   String _password = '';
+  String error = '';
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
 
@@ -57,20 +60,29 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In'),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            _buildTextFields(),
-            _buildButtons(),
-          ],
-        ),
-      ),
-    );
+    return loading
+        ? Loading()
+        : Scaffold(
+            appBar: AppBar(
+              title: Text('Sign In'),
+            ),
+            body: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  _buildTextFields(),
+                  _buildButtons(),
+                  SizedBox(
+                    height: 12.0,
+                  ),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  )
+                ],
+              ),
+            ),
+          );
   }
 
   Widget _buildTextFields() {
@@ -80,13 +92,14 @@ class _SignInState extends State<SignIn> {
           Container(
             child: TextField(
               controller: _emailFilter,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(labelText: 'Email'),
             ),
           ),
           Container(
             child: TextField(
               controller: _passwordFilter,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration:
+                  InputDecoration(labelText: 'Password(6 charachters minimum)'),
               obscureText: true,
             ),
           )
@@ -101,16 +114,15 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: <Widget>[
             ElevatedButton(
-              child: const Text('Login'),
+              child: Text('Login'),
               onPressed: _loginPressed,
             ),
             TextButton(
-              child:
-                  const Text('Don\'t have an account? Tap here to register.'),
+              child: Text('Don\'t have an account? Tap here to register.'),
               onPressed: _formChange,
             ),
             TextButton(
-              child: const Text('Forgot Password?'),
+              child: Text('Forgot Password?'),
               onPressed: _passwordReset,
             )
           ],
@@ -121,11 +133,11 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: <Widget>[
             ElevatedButton(
-              child: const Text('Create an Account'),
+              child: Text('Create an Account'),
               onPressed: _createAccountPressed,
             ),
             TextButton(
-              child: const Text('Have an account? Click here to login.'),
+              child: Text('Have an account? Click here to login.'),
               onPressed: _formChange,
             )
           ],
@@ -137,25 +149,32 @@ class _SignInState extends State<SignIn> {
   // These functions can self contain any user auth logic required, they all have access to _email and _password
 
   Future<void> _loginPressed() async {
+    setState(() => loading = true);
     dynamic result = await _auth.signIn(_email, _password);
     if (result == null) {
       print('Error signing in');
+      setState(() {
+        error = 'could not sign in';
+        loading = false;
+      });
     } else {
       print('Signed in');
       print(result.uid);
     }
-    //print('The user wants to login with $_email and $_password');
-    // Navigator.of(context)
-    //     .push(MaterialPageRoute(builder: (_) => DisplayAccount()));
   }
 
   Future<void> _createAccountPressed() async {
+    setState(() => loading = true);
     dynamic result = await _auth.signUp(_email, _password);
     if (result == null) {
-      print('Error signing up');
+      setState(() {
+        error = 'could not sign in';
+        loading = false;
+      });
+    } else {
+      print('The user wants to create an account with $_email and $_password');
+      print(result.uid);
     }
-    print('The user wants to create an account with $_email and $_password');
-    print(result.uid);
   }
 
   void _passwordReset() {

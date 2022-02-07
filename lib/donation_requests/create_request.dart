@@ -1,4 +1,9 @@
+import 'package:eaid/home/loading.dart';
+import 'package:eaid/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../account/account.dart';
 
 class CreateRequest extends StatefulWidget {
   const CreateRequest({Key? key}) : super(key: key);
@@ -10,17 +15,20 @@ class CreateRequest extends StatefulWidget {
 }
 
 class CreateRequestState extends State<CreateRequest> {
+  bool loading = false;
+
   final TextEditingController _phoneFilter = TextEditingController();
   final TextEditingController _amountFilter = TextEditingController();
   final TextEditingController _requestTitleFilter = TextEditingController();
   final TextEditingController _requestImageFilter = TextEditingController();
   final TextEditingController _requestDescriptionFilter =
       TextEditingController();
-  String? _phone;
-  String? _amount;
-  String? requestTitle;
-  String? requestImage;
-  String? requestDescription;
+  String phone = '';
+  int amount = 0;
+  int amountDonated = 0;
+  String requestTitle = '';
+  String requestImage = '';
+  String requestDescription = '';
 
   _CreateRequestState() {
     _phoneFilter.addListener(_phoneListen);
@@ -32,17 +40,17 @@ class CreateRequestState extends State<CreateRequest> {
 
   void _phoneListen() {
     if (_phoneFilter.text.isEmpty) {
-      _phone = "";
+      phone = "";
     } else {
-      _phone = _phoneFilter.text;
+      phone = _phoneFilter.text;
     }
   }
 
   void _amountListen() {
     if (_amountFilter.text.isEmpty) {
-      _amount = "";
+      amount = 0;
     } else {
-      _amount = _amountFilter.text;
+      amount = int.parse(_amountFilter.text);
     }
   }
 
@@ -72,20 +80,41 @@ class CreateRequestState extends State<CreateRequest> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Create a Fundraiser"),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            _buildTextFields(),
-            _buildButton(),
-          ],
-        ),
-      ),
-    );
+    final user = Provider.of<Account?>(context);
+
+    return loading
+        ? Loading()
+        : Scaffold(
+            appBar: AppBar(
+              title: const Text("Create a Fundraiser"),
+            ),
+            body: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  _buildTextFields(),
+                  Container(
+                    child: Column(children: <Widget>[
+                      ElevatedButton(
+                        child: const Text('Create Fundraiser'),
+                        onPressed: () async {
+                          //setState(() => loading = true);
+                          await DatabaseService(uid: user!.uid).updateUserData(
+                            requestTitle,
+                            requestDescription,
+                            requestImage,
+                            phone,
+                            amount,
+                            amountDonated,
+                          );
+                        },
+                      ),
+                    ]),
+                  )
+                ],
+              ),
+            ),
+          );
   }
 
   Widget _buildTextFields() {
@@ -101,6 +130,7 @@ class CreateRequestState extends State<CreateRequest> {
           Container(
             child: TextField(
               controller: _amountFilter,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: const InputDecoration(labelText: 'Amount(UGX)'),
             ),
           ),
@@ -127,22 +157,5 @@ class CreateRequestState extends State<CreateRequest> {
         ],
       ),
     );
-  }
-
-  Widget _buildButton() {
-    return Container(
-      child: Column(children: <Widget>[
-        ElevatedButton(
-          child: const Text('Create Fundraiser'),
-          onPressed: _ButtonPressed,
-        ),
-      ]),
-    );
-  }
-
-  void _ButtonPressed() {
-    print(
-        'The user wants to donate with Phone number $_phone an amount $_amount');
-    //Navigator.of(context).push(MaterialPageRoute(builder: (_) => Dashboard()));
   }
 }

@@ -44,10 +44,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "ug.eaid.android"
         minSdkVersion 19
-<<<<<<< HEAD
         multiDexEnabled true
-=======
->>>>>>> b193e130065ff62f7f20b8ed3d6a8de19ee7daee
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -73,4 +70,3 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-apply plugin: 'com.google.gms.google-services'
