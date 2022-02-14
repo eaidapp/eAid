@@ -31,6 +31,7 @@ class EAid extends StatelessWidget {
         title: 'eAid',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          fontFamily: 'Sans',
           primarySwatch: Colors.deepPurple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),

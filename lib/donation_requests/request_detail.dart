@@ -18,6 +18,12 @@ class RequestDetail extends StatefulWidget {
 class _RequestDetailState extends State<RequestDetail> {
   @override
   Widget build(BuildContext context) {
+    String amountDonated = widget.request.amountDonated.toString();
+    String amount = widget.request.amount.toString();
+
+    double percentageDonated =
+        widget.request.amountDonated / widget.request.amount;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Fundraiser"),
@@ -31,7 +37,7 @@ class _RequestDetailState extends State<RequestDetail> {
                 height: 300,
                 width: double.infinity,
                 child: Image(
-                  image: AssetImage(widget.request.requestImage),
+                  image: NetworkImage(widget.request.requestImage),
                 ),
               ),
               Padding(
@@ -60,16 +66,31 @@ class _RequestDetailState extends State<RequestDetail> {
                       .push(MaterialPageRoute(builder: (_) => Donation())),
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.fromLTRB(16, 5, 16, 16),
-                child: Text(
-                  "3M collected",
-                  textAlign: TextAlign.center,
-                ),
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(
+                      "Target: UGX $amount ",
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Text(
+                    "Collected: UGX $amountDonated",
+                    textAlign: TextAlign.left,
+                  ),
+                ]),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(16.0),
-                child: LinearProgressIndicator(),
+                child: SizedBox(
+                  height: 7,
+                  child: LinearProgressIndicator(
+                    backgroundColor: Color.fromARGB(255, 204, 181, 244),
+                    value: percentageDonated,
+                  ),
+                ),
               ),
             ],
           ),

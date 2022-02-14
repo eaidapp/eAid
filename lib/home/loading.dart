@@ -4,11 +4,15 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.deepPurpleAccent,
+      color: Colors.grey[400],
       child: const Center(
-        child: CircularProgressIndicator(
-          color: Color.fromARGB(255, 199, 189, 214),
-          strokeWidth: 5.0,
+        child: SizedBox(
+          width: 80,
+          height: 80,
+          child: CircularProgressIndicator(
+            color: Colors.deepPurple,
+            strokeWidth: 5.0,
+          ),
         ),
       ),
     );

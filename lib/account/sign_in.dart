@@ -1,7 +1,6 @@
 import 'package:eaid/home/loading.dart';
 import 'package:eaid/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'display_account.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -14,38 +13,16 @@ class SignIn extends StatefulWidget {
 enum FormType { login, register }
 
 class _SignInState extends State<SignIn> {
-  final TextEditingController _emailFilter = TextEditingController();
-  final TextEditingController _passwordFilter = TextEditingController();
-
   final AuthService _auth = AuthService();
   bool loading = false;
+
+  final _formKey = GlobalKey<FormState>();
 
   String _email = '';
   String _password = '';
   String error = '';
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
-
-  _SignInState() {
-    _emailFilter.addListener(_emailListen);
-    _passwordFilter.addListener(_passwordListen);
-  }
-
-  void _emailListen() {
-    if (_emailFilter.text.isEmpty) {
-      _email = "";
-    } else {
-      _email = _emailFilter.text;
-    }
-  }
-
-  void _passwordListen() {
-    if (_passwordFilter.text.isEmpty) {
-      _password = "";
-    } else {
-      _password = _passwordFilter.text;
-    }
-  }
 
   // Swap in between our two forms, registering and logging in
   void _formChange() async {
@@ -86,22 +63,27 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget _buildTextFields() {
-    return Container(
+    return Form(
+      key: _formKey,
       child: Column(
         children: <Widget>[
-          Container(
-            child: TextField(
-              controller: _emailFilter,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
+          TextFormField(
+            validator: (value) => value!.isEmpty ? 'Enter an email' : null,
+            onChanged: (value) => setState(() {
+              _email = value;
+            }),
+            decoration: InputDecoration(labelText: 'Email'),
           ),
-          Container(
-            child: TextField(
-              controller: _passwordFilter,
-              decoration:
-                  InputDecoration(labelText: 'Password(6 charachters minimum)'),
-              obscureText: true,
-            ),
+          TextFormField(
+            validator: (value) => value!.isEmpty || value.length < 6
+                ? 'Enter a valid password'
+                : null,
+            onChanged: (value) => setState(() {
+              _password = value;
+            }),
+            decoration:
+                InputDecoration(labelText: 'Password(6 charachters minimum)'),
+            obscureText: true,
           )
         ],
       ),
@@ -146,34 +128,38 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  // These functions can self contain any user auth logic required, they all have access to _email and _password
-
   Future<void> _loginPressed() async {
-    setState(() => loading = true);
-    dynamic result = await _auth.signIn(_email, _password);
-    if (result == null) {
-      print('Error signing in');
-      setState(() {
-        error = 'could not sign in';
-        loading = false;
-      });
-    } else {
-      print('Signed in');
-      print(result.uid);
+    if (_formKey.currentState!.validate()) {
+      setState(() => loading = true);
+      dynamic result = await _auth.signIn(_email, _password);
+      if (result == null) {
+        print('Error signing in');
+        setState(() {
+          error = 'could not sign in';
+          loading = false;
+        });
+      } else {
+        print('Signed in');
+        print(result.uid);
+      }
     }
   }
 
   Future<void> _createAccountPressed() async {
-    setState(() => loading = true);
-    dynamic result = await _auth.signUp(_email, _password);
-    if (result == null) {
-      setState(() {
-        error = 'could not sign in';
-        loading = false;
-      });
-    } else {
-      print('The user wants to create an account with $_email and $_password');
-      print(result.uid);
+    if (_formKey.currentState!.validate()) {
+      setState(() => loading = true);
+      dynamic result = await _auth.signUp(_email, _password);
+
+      if (result == null) {
+        setState(() {
+          error = 'could not create an account';
+          loading = false;
+        });
+      } else {
+        print(
+            'The user wants to create an account with $_email and $_password');
+        print(result.uid);
+      }
     }
   }
 

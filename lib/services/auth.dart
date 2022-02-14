@@ -16,17 +16,6 @@ class AuthService {
     return _auth.authStateChanges().map(_accountFromUser);
   }
 
-  //sign in anon
-  Future signInAnon() async {
-    try {
-      UserCredential result = await _auth.signInAnonymously();
-      User? user = result.user;
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
   //sign in email and password
   Future signIn(String email, String password) async {
     try {
@@ -54,9 +43,6 @@ class AuthService {
       return null;
     }
   }
-
-  //create fundraiser
-  Future createFundraiser() async {}
 
   //sign out
   Future signOut() async {
