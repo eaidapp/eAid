@@ -23,6 +23,7 @@ class _DonationState extends State<Donation> {
   final TextEditingController _amount = TextEditingController();
   final TextEditingController _phone = TextEditingController();
   final TextEditingController _email = TextEditingController();
+  final TextEditingController _name = TextEditingController();
 
   String? _ref;
 
@@ -50,7 +51,7 @@ class _DonationState extends State<Donation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Authorise donation")),
+      appBar: AppBar(title: const Text("Make payment")),
       body: Container(
         width: double.infinity,
         margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -96,6 +97,17 @@ class _DonationState extends State<Donation> {
                 ),
               ),
               Container(
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                child: TextFormField(
+                  controller: _name,
+                  textInputAction: TextInputAction.next,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(hintText: "Name"),
+                  validator: (value) =>
+                      value!.isNotEmpty ? null : "Name is required",
+                ),
+              ),
+              Container(
                 width: double.infinity,
                 height: 50,
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -103,7 +115,7 @@ class _DonationState extends State<Donation> {
                   onPressed: _validateInPut,
                   fillColor: Colors.deepPurple,
                   child: const Text(
-                    "Donate",
+                    "Pay",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -119,14 +131,16 @@ class _DonationState extends State<Donation> {
     final amount = _amount.text;
     final phone = _phone.text;
     final email = _email.text;
+    final name = _name.text;
 
     if (formKey.currentState!.validate()) {
-      _makePayment(context, amount.trim(), phone.trim(), email.trim());
+      _makePayment(
+          context, amount.trim(), phone.trim(), email.trim(), name.trim());
     }
   }
 
-  void _makePayment(
-      BuildContext context, String amount, String phone, String email) async {
+  void _makePayment(BuildContext context, String amount, String phone,
+      String email, String name) async {
     try {
       Flutterwave flutterwave = Flutterwave.forUIPayment(
         context: this.context,
@@ -135,12 +149,12 @@ class _DonationState extends State<Donation> {
         currency: "UGX",
         amount: amount,
         email: email,
-        fullName: "Ronald Ampurire",
+        fullName: name,
         txRef: _ref!,
         isDebugMode: false,
         phoneNumber: phone,
-        acceptCardPayment: true,
-        acceptAccountPayment: true,
+        acceptCardPayment: false,
+        acceptAccountPayment: false,
         acceptUgandaPayment: true,
       );
       final ChargeResponse response =
