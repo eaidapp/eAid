@@ -1,11 +1,18 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:eaid/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwave/flutterwave.dart';
 import 'package:flutterwave/models/responses/charge_response.dart';
+import '../donation_requests/request.dart';
 
 class Donation extends StatefulWidget {
-  Donation({Key? key}) : super(key: key);
+  //Donation({Key? key}) : super(key: key);
+  final Request request;
+  const Donation({
+    Key? key,
+    required this.request,
+  }) : super(key: key);
 
   @override
   _DonationState createState() => _DonationState();
@@ -159,10 +166,19 @@ class _DonationState extends State<Donation> {
             margin: const EdgeInsets.fromLTRB(30, 20, 30, 20),
             width: double.infinity,
             height: 50,
-            child: Text(message),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+            ),
           ),
         );
       },
     );
+  }
+
+  Future recordDonation() async {
+    int amountGiven = widget.request.amountDonated + int.parse(_amount.text);
+    await DatabaseService(uid: widget.request.requestId)
+        .updateAmountDonated(amountGiven);
   }
 }

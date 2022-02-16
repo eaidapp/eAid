@@ -62,8 +62,10 @@ class _RequestDetailState extends State<RequestDetail> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   child: const Text('Donate'),
-                  onPressed: () => Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => Donation())),
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => Donation(
+                            request: widget.request,
+                          ))),
                 ),
               ),
               Padding(

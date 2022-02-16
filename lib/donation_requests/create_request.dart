@@ -33,6 +33,7 @@ class _CreateRequestState extends State<CreateRequest> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<Account?>(context);
+    String requestId = user!.uid;
     return loading
         ? Loading()
         : Scaffold(
@@ -49,7 +50,7 @@ class _CreateRequestState extends State<CreateRequest> {
                     Column(children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: imageBox(user!.uid),
+                        child: imageBox(user.uid),
                       ),
                       ElevatedButton(
                         child: const Text('Create Fundraiser'),
@@ -65,6 +66,7 @@ class _CreateRequestState extends State<CreateRequest> {
                               phone,
                               amount,
                               amountDonated,
+                              requestId,
                             );
                           }
                         },

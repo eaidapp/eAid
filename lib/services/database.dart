@@ -9,14 +9,29 @@ class DatabaseService {
   final CollectionReference requestCollection =
       FirebaseFirestore.instance.collection('fundraisers');
 
-  Future updateUserData(String requestTitle, String requestDescription,
-      String requestImage, String phone, int amount, int amountDonated) async {
+  //update all data
+  Future updateUserData(
+      String requestTitle,
+      String requestDescription,
+      String requestImage,
+      String phone,
+      int amount,
+      int amountDonated,
+      String requestId) async {
     return await requestCollection.doc(uid).set({
       'requestTitle': requestTitle,
       'requestDescription': requestDescription,
       'requestImage': requestImage,
       'phone': phone,
       'amount': amount,
+      'amountDonated': amountDonated,
+      'requestId': requestId,
+    });
+  }
+
+  //update only amountDonated
+  Future updateAmountDonated(int amountDonated) async {
+    return await requestCollection.doc(uid).set({
       'amountDonated': amountDonated,
     });
   }
@@ -31,6 +46,7 @@ class DatabaseService {
         phone: (doc.data() as dynamic)['phone'] ?? '',
         amount: (doc.data() as dynamic)['amount'] ?? 0,
         amountDonated: (doc.data() as dynamic)['amountDonated'] ?? 0,
+        requestId: (doc.data() as dynamic)['requestId'] ?? '',
       );
     }).toList();
   }

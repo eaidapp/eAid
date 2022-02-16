@@ -24,7 +24,6 @@ class _DisplayAccountState extends State<DisplayAccount> {
 
   @override
   Widget build(BuildContext context) {
-    bool hasRequest = false;
     final user = Provider.of<Account?>(context);
 
     return loading
@@ -62,7 +61,7 @@ class _DisplayAccountState extends State<DisplayAccount> {
                         child: Column(
                           children: <Widget>[
                             Padding(
-                                padding: EdgeInsets.all(25),
+                                padding: const EdgeInsets.all(25),
                                 child: RequestTile(userData!)),
                             Padding(
                               padding: const EdgeInsets.all(16.0),

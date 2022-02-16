@@ -33,7 +33,7 @@ class _RequestListState extends State<RequestList> {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(14, 25, 14, 0),
+              padding: const EdgeInsets.fromLTRB(13, 25, 13, 0),
               child: RequestCard(requests[index]),
             ),
           );

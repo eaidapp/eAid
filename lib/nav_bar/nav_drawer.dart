@@ -2,7 +2,7 @@ import 'package:eaid/nav_bar/wrapper.dart';
 import 'package:flutter/material.dart';
 import '../home/home.dart';
 import '../about/about.dart';
-import '../settings/settings.dart';
+import '../help/help.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -21,6 +21,10 @@ class NavDrawer extends StatelessWidget {
                 children: const [
                   Expanded(
                     flex: 3,
+                    // child: CircleAvatar(
+                    //   backgroundImage: AssetImage('assets/icon/icon.png'),
+                    //   backgroundColor: Colors.transparent,
+                    // ),
                     child: Icon(
                       Icons.monetization_on,
                       size: 40,
@@ -65,36 +69,6 @@ class NavDrawer extends StatelessWidget {
             color: Colors.grey,
           ),
           ListTile(
-            title: const Text("Settings"),
-            leading: IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {},
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const Profile()));
-            },
-          ),
-          const Divider(
-            color: Colors.grey,
-          ),
-          ListTile(
-            title: const Text("About"),
-            leading: IconButton(
-              icon: const Icon(Icons.contacts_rounded),
-              onPressed: () {},
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => Contact()));
-            },
-          ),
-          const Divider(
-            color: Colors.grey,
-          ),
-          ListTile(
             title: const Text("Start a fundraiser"),
             leading: IconButton(
               icon: const Icon(Icons.manage_accounts_rounded),
@@ -106,6 +80,36 @@ class NavDrawer extends StatelessWidget {
               Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => const Wrapper()));
+            },
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          ListTile(
+            title: const Text("Help"),
+            leading: IconButton(
+              icon: const Icon(Icons.help),
+              onPressed: () {},
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const Help()));
+            },
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          ListTile(
+            title: const Text("About"),
+            leading: IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () {},
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => Contact()));
             },
           ),
           const Divider(

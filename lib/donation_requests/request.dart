@@ -5,6 +5,7 @@ class Request {
   final int amount;
   final int amountDonated;
   final String phone;
+  final String requestId;
 
   Request({
     required this.requestTitle,
@@ -13,6 +14,6 @@ class Request {
     required this.phone,
     required this.amount,
     required this.amountDonated,
+    required this.requestId,
   });
-
 }
