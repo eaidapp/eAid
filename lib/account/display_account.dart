@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eaid/donation/withdraw.dart';
 import 'package:eaid/donation_requests/request_tile.dart';
 import 'package:eaid/home/loading.dart';
 import 'package:eaid/services/auth.dart';
@@ -63,6 +64,20 @@ class _DisplayAccountState extends State<DisplayAccount> {
                             Padding(
                                 padding: const EdgeInsets.all(25),
                                 child: RequestTile(userData!)),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.purple),
+                                child: const Text(
+                                  'Withdraw donations',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) => const Withdraw())),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: ElevatedButton(
