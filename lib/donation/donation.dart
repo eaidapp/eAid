@@ -162,6 +162,7 @@ class _DonationState extends State<Donation> {
 
       if (response != null) {
         showLoading("Success");
+        recordDonation();
       } else {
         showLoading("No Response!");
       }
